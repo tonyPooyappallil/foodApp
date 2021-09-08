@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="foodApp.css" />
+    <title>Food Recipe Search Engine</title>
+  </head>
+
+  <body></body>
+</html>
+
+<script type="module">
+  import { navBar } from "./components/navBar.js";
+
+  import { test } from "./scripts/test.js";
+  console.log(test);
+  import {
+    debounce,
+    main,
+    search,
+    apend,
+    myElement,
+  } from "./scripts/searching.js";
+
+  import {
+    appendMain,
+    mainAppender,
+    mainView,
+  } from "./scripts/mainViewMaker.js";
+  document.body.innerHTML = await navBar();
+
+  var showDiv = document.getElementById("showDiv");
+  var suggestionsDiv = document.getElementById("suggestionsDiv");
+
+  let searchButton = document.getElementById("search");
+
+  searchButton.oninput = () => {
+    let name = document.getElementById("search").value;
+    if (name == "") {
+      console.log("emmmmmmpppppptyyyyyyyyyyyyyyyy");
+      window.location.href = "foodAppHome.html";
+    }
+    debounce(main, 500, showDiv, suggestionsDiv, name);
+  };
+
+  var lastResort = setInterval(() => {
+    if (myElement != undefined) {
+      console.log(myElement);
+      clearInterval(lastResort);
+      mainView(myElement, showDiv);
+
+      suggestionsDiv.innerHTML = "";
+    }
+  }, 200);
+
+  let searcResDiv = document.querySelectorAll(".clickClass");
+
+  console.log(searcResDiv);
+
+  await function last(arr) {
+    console.log(arr);
+  };
+
+  var divforCss = document.querySelector("#navContainer>:nth-child(1)");
+  divforCss.style.backgroundColor = "rgb(180, 180, 180)";
+  divforCss.style.borderBottom = "3px solid black";
+</script>
