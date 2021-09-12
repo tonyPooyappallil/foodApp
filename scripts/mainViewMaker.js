@@ -195,8 +195,16 @@ function mainAppender(arr, showDiv) {
 
       let div3 = document.createElement("div");
       div3.append(div2, h2);
+
+      let video = document.createElement("iframe");
+      let link = "https://www.youtube.com/embed/";
+      let both = strYoutube.split("=");
+
+      link += both[1];
+      video.src = link;
+
       let divUltimate = document.createElement("div");
-      divUltimate.append(img, h1, div1, div3);
+      divUltimate.append(img, h1, div1, div3, video);
 
       showDiv.append(divUltimate);
     }
