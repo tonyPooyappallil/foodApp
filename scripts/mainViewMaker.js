@@ -6,22 +6,37 @@ function mainView(Element, showDiv) {
   );
 }
 
-async function appendMain(url, showDiv) {
-  try {
-    var res = await fetch(url);
-    //www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
-    //console.log(res);
-    var data = await res.json();
-    console.log(data);
-    //return data.meals;
-  } catch (error) {
-    console.log(error);
+async function appendMain(url, showDiv, newday, flag) {
+  if (newday == undefined) {
+    newday = true;
+    flag = true;
   }
-  showDiv.innerHTML = "";
-  mainAppender(data.meals, showDiv);
+  if (newday) {
+    try {
+      var res = await fetch(url);
+      //www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+      //console.log(res);
+      var data = await res.json();
+      console.log(data);
+      //return data.meals;
+    } catch (error) {
+      console.log(error);
+    }
+    showDiv.innerHTML = "";
+    if (!flag) {
+      localStorage.setItem("array", JSON.stringify(data.meals));
+      console.log(JSON.parse(localStorage.getItem("array")));
+    }
+
+    mainAppender(data.meals, showDiv);
+  } else {
+    console.log(JSON.parse(localStorage.getItem("array")));
+    mainAppender(JSON.parse(localStorage.getItem("array")), showDiv);
+  }
 }
 
 function mainAppender(arr, showDiv) {
+  console.log(arr, showDiv);
   arr.forEach(
     ({
       strMeal,

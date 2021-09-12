@@ -20,7 +20,24 @@
     mainView,
   } from "./scripts/mainViewMaker.js";
   document.body.innerHTML = await navBar();
-  appendMain("https://www.themealdb.com/api/json/v1/1/random.php", showDiv);
+
+  let date = new Date().getDate();
+  // alert(date);
+  let newday;
+  if (localStorage.getItem("date") == null) {
+    localStorage.setItem("date", date);
+    newday = true;
+  } else if (localStorage.getItem("date") == date) {
+    // alert("same");
+    newday = false;
+  }
+  console.log(localStorage.getItem("date"), date);
+  appendMain(
+    "https://www.themealdb.com/api/json/v1/1/random.php",
+    showDiv,
+    newday,
+    false
+  );
   var divforSearchHide = document.querySelector("#searchDiv");
   divforSearchHide.style.display = "none";
   var divforCss = document.querySelector("#navContainer>:nth-child(2)");

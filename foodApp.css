@@ -132,6 +132,9 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
+iframe {
+  margin: 20px;
+}
 @media screen and (max-width: 600px) {
   #beforeNav > h1 {
     opacity: 1;

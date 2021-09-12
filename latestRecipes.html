@@ -13,24 +13,56 @@
 
 <script type="module">
   import { navBar } from "./components/navBar.js";
+  document.body.innerHTML = await navBar();
+  var showDiv = document.getElementById("showDiv");
+  console.log(showDiv + "showdiv");
+  let date = new Date().getDate();
+  // alert(date);
+  let newday;
+  if (localStorage.getItem("latdate") == null) {
+    localStorage.setItem("latdate", date);
+    newday = true;
+  } else if (localStorage.getItem("latdate") == date) {
+    //  alert("same");
+    newday = false;
+  }
 
-  async function test() {
+  if (localStorage.getItem("already") == null) {
+    localStorage.setItem("already", JSON.stringify([]));
+  }
+
+  async function test(i, showDiv) {
+    console.log(showDiv + "showdiv");
+    if (!newday) {
+      let already = JSON.parse(localStorage.getItem("already"));
+      console.log(already[i]);
+      mainAppender(already[i], showDiv);
+      return;
+    }
+
     let data = await fetch(
       "https://www.themealdb.com/api/json/v1/1/random.php"
     );
     data = await data.json();
-    console.log(data);
+    // console.log(data);
+
+    if (newday) {
+      let already = JSON.parse(localStorage.getItem("already"));
+      already.push(data.meals);
+      localStorage.setItem("already", JSON.stringify(already));
+    }
+    console.log(data.meals);
     mainAppender(data.meals, showDiv);
   }
   for (var i = 0; i < 6; i++) {
-    test();
+    test(i, showDiv);
   }
   import {
     appendMain,
     mainAppender,
     mainView,
   } from "./scripts/mainViewMaker.js";
-  document.body.innerHTML = await navBar();
+
   var divforSearchHide = document.querySelector("#searchDiv");
   divforSearchHide.style.display = "none";
   var divforCss = document.querySelector("#navContainer>:nth-child(3)");
