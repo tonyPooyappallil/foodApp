@@ -5,7 +5,7 @@ async function navBar() {
 <div id="mainNav">
   <div id="navContainer">
     <div class="hoverPointer">
-      <a href="foodAppHome.html"><h2>Search By Recipe Name</h2></a>
+      <a href="index.html"><h2>Search By Recipe Name</h2></a>
     </div>
     <div class="hoverPointer">
       <a href="recipeOfDay.html"><h2>Recipe Of the Day</h2></a>
