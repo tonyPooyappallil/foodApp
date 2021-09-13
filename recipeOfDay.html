@@ -30,6 +30,9 @@
   } else if (localStorage.getItem("date") == date) {
     // alert("same");
     newday = false;
+  } else {
+    localStorage.setItem("date", date);
+    newday = true;
   }
   console.log(localStorage.getItem("date"), date);
   appendMain(

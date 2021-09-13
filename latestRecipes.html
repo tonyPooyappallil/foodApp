@@ -25,6 +25,9 @@
   } else if (localStorage.getItem("latdate") == date) {
     //  alert("same");
     newday = false;
+  } else {
+    localStorage.setItem("latdate", date);
+    newday = true;
   }
 
   if (localStorage.getItem("already") == null) {
