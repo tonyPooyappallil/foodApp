@@ -17,6 +17,7 @@
   var showDiv = document.getElementById("showDiv");
   console.log(showDiv + "showdiv");
   let date = new Date().getDate();
+
   // alert(date);
   let newday;
   if (localStorage.getItem("latdate") == null) {
@@ -28,6 +29,7 @@
   } else {
     localStorage.setItem("latdate", date);
     newday = true;
+    localStorage.setItem("already", JSON.stringify([]));
   }
 
   if (localStorage.getItem("already") == null) {
@@ -35,7 +37,7 @@
   }
 
   async function test(i, showDiv) {
-    console.log(showDiv + "showdiv");
+    //  console.log(showDiv + "showdiv");
     if (!newday) {
       let already = JSON.parse(localStorage.getItem("already"));
       console.log(already[i]);
@@ -51,10 +53,11 @@
 
     if (newday) {
       let already = JSON.parse(localStorage.getItem("already"));
+
       already.push(data.meals);
       localStorage.setItem("already", JSON.stringify(already));
     }
-    console.log(data.meals);
+    // console.log(data.meals);
     mainAppender(data.meals, showDiv);
   }
   for (var i = 0; i < 6; i++) {
